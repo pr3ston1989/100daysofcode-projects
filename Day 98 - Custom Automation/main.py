@@ -18,17 +18,17 @@ for filename in os.listdir(folder):
                         im = im.convert("RGB")
                     try:
                         print(f"Converting: {os.path.join(folder, filename)}")
-                        im.save(f"./converted/{filename[:-3]}.jpg")
+                        im.save(f"{folder}/converted/{filename[:-3]}.jpg")
                     except FileNotFoundError:
                         print(f"Converting: {os.path.join(folder, filename)}")
                         os.makedirs(os.path.join(folder, "converted"))
-                        im.save(f"./converted/{filename[:-3]}.jpg")
+                        im.save(f"{folder}/converted/{filename[:-3]}.jpg")
 
                     try:
-                        os.rename(os.path.join(folder, filename), f"./original/{filename}")
+                        os.rename(os.path.join(folder, filename), f"{folder}/original/{filename}")
                     except FileNotFoundError:
                         os.makedirs(os.path.join(folder, "original"))
-                        os.rename(os.path.join(folder, filename), f"./original/{filename}")
+                        os.rename(os.path.join(folder, filename), f"{folder}/original/{filename}")
         except (UnidentifiedImageError, PermissionError):
             pass
 
