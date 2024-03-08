@@ -11,18 +11,18 @@ class User(db.Model):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     login: Mapped[str] = mapped_column(String(50), nullable=False, unique=True)
-    first_name: Mapped[str] = mapped_column(String(50))
-    middle_name: Mapped[str] = mapped_column(String(50))
-    last_name: Mapped[str] = mapped_column(String(50))
+    first_name: Mapped[str] = mapped_column(String(50), nullable=True)
+    middle_name: Mapped[str] = mapped_column(String(50), nullable=True)
+    last_name: Mapped[str] = mapped_column(String(50), nullable=True)
     email: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
     password_hash: Mapped[str] = mapped_column(String(100), nullable=False)
     registered_at: Mapped[str] = mapped_column(DateTime, nullable=False)
     last_login: Mapped[str] = mapped_column(DateTime, nullable=False)
-    intro: Mapped[str] = mapped_column(String)
-    profile: Mapped[str] = mapped_column(String)
-    avatar: Mapped[bytes] = mapped_column(LargeBinary)
+    intro: Mapped[str] = mapped_column(String, nullable=True)
+    profile: Mapped[str] = mapped_column(String, nullable=True)
+    avatar: Mapped[bytes] = mapped_column(LargeBinary, nullable=True)
     user_posts = relationship("BlogPost", back_populates="post_author")
-    user_comments = relationship("Comment", back_populates="comment_author")
+    user_comments = relationship("PostComment", back_populates="comment_author")
 
 class BlogPost(db.Model):
     __tablename__ = "posts"
